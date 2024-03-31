@@ -11,7 +11,7 @@ separator = ';'
 
 def macFileAppendLine(string: str):
     fileHandle = open(macEntriesFilePath,"a")
-    fileHandle.write('\n' + string + '\n')
+    fileHandle.write(string + '\n')
     fileHandle.close() 
 
 # Create file if it does not exist
@@ -20,7 +20,7 @@ if os.path.isfile(macEntriesFilePath) is False:
     fileHandle.close()
 
 # Parameter check
-if len(sys.argv) != 3:
+if len(sys.argv) != 4:
     print("Parameter error")
     sys.exit(-1)
 
@@ -35,6 +35,12 @@ elif sys.argv[2] == 'False':
     macVendorLookup = False
 else:    
     print("Parameter 'lookupMmode' error")
+    sys.exit(-1)
+
+if os.path.isfile(sys.argv[3]):
+    macEntriesFilePath = sys.argv[3]
+else:
+    print("File for local MAC lookup doesn't exist")
     sys.exit(-1)
 
 colWidthIP = 15
